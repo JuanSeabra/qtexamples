@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,14 +26,15 @@ void MainWindow::on_actionOpen_triggered()
     QString filename = QFileDialog::getOpenFileName(this, "open the file");
     QFile file(filename);
     currentFile = filename;
+    currentFileInfo = new QFileInfo (filename);
     if(!file.open(QIODevice::ReadOnly | QFile::Text)){
         QMessageBox::warning(this,"Warning", "cannot open file" );
         return;
     }
     setWindowTitle(filename);
     QTextStream in(&file);
-    QString text = in.readAll();
-    ui->textEdit->setText(text);
+    //QString text = in.readAll();
+    //ui->textEdit->setText(text);
     file.close();
 }
 
@@ -55,4 +57,15 @@ void MainWindow::on_actionSave_as_triggered()
 void MainWindow::on_actionExit_triggered()
 {
     QApplication::quit();
+}
+
+void MainWindow::on_actionFile_info_triggered()
+{
+    QMessageBox *message = new QMessageBox;
+    message->setWindowTitle(QString("File info"));
+    QString info = "File Path: " + currentFileInfo->absoluteFilePath() + "\n"
+            + "File Size: " + QString::number(currentFileInfo->size()) + " bytes \n"
+            + "Last Modified: " + currentFileInfo->lastModified().toString("yyyy-MM-dd hh:mm:ss t");
+    message->setText(info);
+    message->show();
 }

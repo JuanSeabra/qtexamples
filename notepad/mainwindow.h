@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
-
+#include <QFileInfo>
 
 namespace Ui {
 class MainWindow;
@@ -28,9 +28,12 @@ private slots:
 
     void on_actionExit_triggered();
 
+    void on_actionFile_info_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString currentFile = "";
+    QFileInfo *currentFileInfo;
 };
 
 #endif // MAINWINDOW_H

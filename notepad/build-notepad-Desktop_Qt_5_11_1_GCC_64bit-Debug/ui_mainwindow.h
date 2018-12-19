@@ -35,6 +35,7 @@ public:
     QAction *actionCut;
     QAction *actionUndo;
     QAction *actionRedo;
+    QAction *actionFile_info;
     QWidget *centralWidget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -67,6 +68,9 @@ public:
         actionSave_as->setIcon(icon2);
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QStringLiteral("actionExit"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/imgs/Icons/DeleteSticky.bmp"), QSize(), QIcon::Normal, QIcon::On);
+        actionExit->setIcon(icon3);
         actionCopy = new QAction(MainWindow);
         actionCopy->setObjectName(QStringLiteral("actionCopy"));
         actionPaste = new QAction(MainWindow);
@@ -77,6 +81,11 @@ public:
         actionUndo->setObjectName(QStringLiteral("actionUndo"));
         actionRedo = new QAction(MainWindow);
         actionRedo->setObjectName(QStringLiteral("actionRedo"));
+        actionFile_info = new QAction(MainWindow);
+        actionFile_info->setObjectName(QStringLiteral("actionFile_info"));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/imgs/Icons/Sticky.bmp"), QSize(), QIcon::Normal, QIcon::On);
+        actionFile_info->setIcon(icon4);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayoutWidget = new QWidget(centralWidget);
@@ -111,15 +120,16 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEdit->menuAction());
+        menuFile->addAction(actionNew);
+        menuFile->addAction(actionSave_as);
+        menuFile->addAction(actionOpen);
+        menuFile->addAction(actionFile_info);
+        menuFile->addAction(actionExit);
         menuEdit->addAction(actionCopy);
         menuEdit->addAction(actionPaste);
         menuEdit->addAction(actionCut);
         menuEdit->addAction(actionUndo);
         menuEdit->addAction(actionRedo);
-        mainToolBar->addAction(actionNew);
-        mainToolBar->addAction(actionSave_as);
-        mainToolBar->addAction(actionOpen);
-        mainToolBar->addAction(actionExit);
 
         retranslateUi(MainWindow);
 
@@ -138,6 +148,7 @@ public:
         actionCut->setText(QApplication::translate("MainWindow", "Cut", nullptr));
         actionUndo->setText(QApplication::translate("MainWindow", "Undo", nullptr));
         actionRedo->setText(QApplication::translate("MainWindow", "Redo", nullptr));
+        actionFile_info->setText(QApplication::translate("MainWindow", "File info", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
     } // retranslateUi
