@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
 QStandardItemModel* MainWindow::createTreeViewModel(int itens){
     QStandardItemModel *model = new QStandardItemModel();
     QStandardItem *dad, *son;
-    int step = 0, next_step = 0, step_size=1000000;
+    int step = 0, next_step = 0;
     while(step < itens){
         next_step += 100;
         if(next_step > itens){
@@ -33,6 +33,7 @@ QStandardItemModel* MainWindow::createTreeViewModel(int itens){
             dad->appendRow(son);
         }
     }
+
     return model;
 }
 
