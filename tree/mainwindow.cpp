@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    icon = new QIcon("/Icons/Open.bmp");
 }
 
 MainWindow::~MainWindow()
@@ -19,7 +20,7 @@ QStandardItem* MainWindow::createTree(int begin, int end) {
     QStandardItem* createditem;
     int step = 0, size = end-begin;
 
-    if (begin == end) return new QStandardItem(QString::number(end));
+    if (begin == end) return new QStandardItem(QString::number(end)); //usar setIcon(icon)
 
     createditem = new QStandardItem(QString::number(begin)+".."+QString::number(end-1));
 
