@@ -46,6 +46,7 @@ QStandardItem* MainWindow::createTree(int begin, int end) {
 void MainWindow::on_pushButton_clicked()
 {
     int number = ui->lineEdit->text().toInt();
+    int step = 0, size = number;
     std::cout << "valor: " << number << std::endl;
 
     QStandardItemModel* model = new QStandardItemModel;
@@ -53,7 +54,15 @@ void MainWindow::on_pushButton_clicked()
         for (int i = 0; i < number; ++i){
             model->appendRow(new QStandardItem(QString::number(i)));
     } else {
-        model->appendRow(createTree(0,number));
+        while (size/=10) step++;
+        step -= 1;
+        step = int (pow(10,step));
+        for (int i = 0; i < number; i+=step) {
+            if (i+step < number)
+                model->appendRow(createTree(i,i+step));
+            else
+                model->appendRow(createTree(i,number));
+        }
     }
 
     ui->treeView->setModel(model);
@@ -63,3 +72,4 @@ void MainWindow::on_lineEdit_returnPressed()
 {
     on_pushButton_clicked();
 }
+
