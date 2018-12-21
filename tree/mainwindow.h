@@ -19,7 +19,7 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    QStandardItemModel* createTreeViewModel(int itens);
+    QStandardItem* createTree(int begin, int end);
 
     void on_lineEdit_returnPressed();
 
